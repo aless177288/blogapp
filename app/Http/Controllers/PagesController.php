@@ -15,9 +15,8 @@ class PagesController extends Controller
                 // $posts = Post::whereNotNull('published_at')
                 // ->where('published_at','<=',Carbon::now())
                 // ->latest('published_at')->get();
-
-                $posts= Post::published()->get();
-                return view('welcome',compact('posts'));
+$posts = Post::published()->paginate(6);
+return view('welcome', compact('posts'));
 
             }
             

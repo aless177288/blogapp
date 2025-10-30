@@ -20,10 +20,24 @@ header nav li a:hover{
 	padding-bottom: 5px;
 }
 
-.logo img{
-	width: 150px;
+.logo {
+    text-align: left; /* Cambia de center a left */
+    margin-top: -20px; /* Sube el logo 20px (ajusta según necesites) */
+    margin-left: -10px; /* Mueve más a la izquierda (ajusta según necesites) */
+    padding: 0;
 }
 
+.logo img {
+    width: 80vw; /* 80% del ancho de la pantalla */
+    max-width: 300px;
+    height: auto;
+    transition: transform 0.3s ease;
+    display: block; /* Importante para que funcione margin-left */
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
 
 .post{
 	background: #fff;
@@ -124,7 +138,7 @@ cite .img-cite, .cite .img-cite{
 }
 
 .footer footer{
-	background: #1abc9c;
+	background: #057de6;
 	padding: 45px;
 	text-align: center;
 	color: #ffffff;
@@ -257,7 +271,7 @@ a.btn-bar{
       }
       
       .custom-toggle .bar {
-          background-color: #1abc9c;
+          background-color: #3648d7;
           display: block;
           width: 20px;
           height: 2px;
