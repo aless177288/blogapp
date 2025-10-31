@@ -44,7 +44,7 @@
 <div class="row mb-2">
   <div class="col-sm-6">
     <h1 class="m-0">Posts
-
+<h1>EditBlade.php<h1/>
       <small>Crear publicacion</small>
     </h1>
   </div>

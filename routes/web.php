@@ -30,6 +30,8 @@ Route::get('admin/posts/create/','App\Http\Controllers\Admin\PostsController@cre
 Route::post('admin/posts/store/','App\Http\Controllers\Admin\PostsController@store')->name('admin.posts.store');
 Route::get('admin/posts/{post}','App\Http\Controllers\Admin\PostsController@edit')->name('admin.posts.edit');
 Route::put('admin/posts/{post}','App\Http\Controllers\Admin\PostsController@update')->name('admin.posts.update');
+Route::delete('admin/posts/{post}', [PostsController::class, 'delete'])
+     ->name('admin.posts.destroy');
 Route::post('{post}/photos','App\Http\Controllers\Admin\PhotosController@store')
 ->name('admin.posts.photos.store');
 
