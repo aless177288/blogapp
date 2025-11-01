@@ -24,7 +24,8 @@ class PostsController extends Controller
     {   
         // $post = Post::find($id);
 
-    return view('posts.show',compact('post'));
+        $categories = Category::all();
+    return view('posts.show',compact('categories','post'));
 
 
     }

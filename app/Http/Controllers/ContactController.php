@@ -22,7 +22,7 @@ class ContactController extends Controller
         // 3. Formatear el mensaje
         $message = "🌐 *Nuevo mensaje del Portafolio* 🌐\n\n"
                  . "👤 *De:* " . htmlspecialchars($request->name) . "\n"
-                 . "📧 *Email:* " . htmlspecialchars($request->whatsapp) . "\n"
+                 . "📞 *Telefono Whats:* " . htmlspecialchars($request->whatsapp) . "\n"
                  . "💬 *Mensaje:*\n" . htmlspecialchars($request->message);
 
         // 4. Enviar el mensaje a Telegram
