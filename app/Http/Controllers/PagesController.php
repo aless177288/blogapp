@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
 
 class PagesController extends Controller
 {
@@ -16,7 +17,8 @@ class PagesController extends Controller
                 // ->where('published_at','<=',Carbon::now())
                 // ->latest('published_at')->get();
 $posts = Post::published()->paginate(6);
-return view('welcome', compact('posts'));
+$categories = Category::all();
+return view('welcome', compact('posts','categories'));
 
             }
             

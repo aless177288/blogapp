@@ -12,9 +12,16 @@ use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
+
+
+    public function etiquetas(){
+
+        return "etiquetas";
+    }
     public function index()
     {
         $posts = Post::latest()->get();
+    
         return view('admin.posts.index', compact('posts'));
     }
 

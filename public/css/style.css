@@ -48,11 +48,71 @@ header nav li a:hover{
 	position: relative;
 	padding: 65px 100px;
 }
+
 .post .category{
-	background: #1abc9c;
+	background: #0685d9b1;
 	padding: 5px 10px;
 	color: white;
 	position: absolute;
+    right: -11px;
+    top: 30px;
+    text-transform: capitalize;
+}
+/* ===================================== */
+/* Estilos Botón Flotante Telegram
+/* ===================================== */
+
+.telegram-float {
+    position: fixed;         /* Posición fija */
+    bottom: 25px;            /* A 25px de la parte inferior */
+    right: 25px;             /* A 25px de la parte derecha */
+    background-color: #0088cc; /* Color azul de Telegram */
+    color: white;            /* Color del ícono (blanco) */
+    width: 60px;             /* Ancho */
+    height: 60px;            /* Alto */
+    border-radius: 50%;      /* Para hacerlo redondo */
+    display: flex;           /* Para centrar el ícono */
+    align-items: center;     /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    font-size: 32px;         /* Tamaño del ícono */
+    text-decoration: none;   /* Quita el subrayado del enlace */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    z-index: 1000;           /* Asegura que esté por encima de otro contenido */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Efecto al pasar el mouse */
+.telegram-float:hover {
+    background-color: #0077b3; /* Un azul un poco más oscuro */
+    transform: scale(1.1);     /* Lo hace un poco más grande */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+
+.btn-leer-mas {
+    /* Color de fondo */
+    background-color: #0685d9;
+    /* Color del texto */
+    color: white;
+    /* Estilo (importante para que se vea como un botón) */
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease; /* Transición suave para el hover */
+    font-weight: 600;
+}
+
+.btn-leer-mas:hover {
+    /* Fondo 30% más oscuro para el efecto hover */
+    background-color: #045892; 
+    cursor: pointer;
+}
+.categoria{
+	padding: 65px 100px;
+	background: #0685d9b1;
+	padding: 2px 5px 10px 5px;
+	color: white;
     right: -11px;
     top: 30px;
     text-transform: capitalize;

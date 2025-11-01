@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+
 	<section class="posts container">
 		
 @foreach($posts as $post)
@@ -37,10 +38,11 @@
 				<p>{{$post->excerpt}}</p>
 				<footer class="container-flex space-between">
 					<div class="read-more">
-						<a href="blog/{{$post->url}}" class="text-uppercase c-green">Leer Mas</a>
+						<a href="blog/{{$post->url}}" class="btn-leer-mas ">Leer Mas</a>
 					</div>
 					<div class="tags container-flex">
                         @foreach($post->tags as $tag)
+						
 						<span class="tag c-gray-1 text-capitalize">#{{$tag->name}}</span>
                         @endforeach
 					</div>

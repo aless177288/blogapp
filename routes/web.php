@@ -16,6 +16,12 @@ use App\Http\Controllers\Admin\PostsController;
 
 Route::get('/', '\App\Http\Controllers\PagesController@home');
 Route::get('blog/{post}', '\App\Http\Controllers\PostsController@show')->name('posts.show');
+Route::get('category/{category}', '\App\Http\Controllers\PostsController@category')->name('category.show');
+Route::post('/send-telegram', '\App\Http\Controllers\ContactController@sendMessage')->name('contact.send');
+
+// Route::post('/send-telegram', [\App\Http\Controllers\ContactController::class, 'sendMessage'])->name('contact.send');
+
+
 Route::get('posts', function () {
    return App\Models\Post::all();
 });
@@ -32,6 +38,7 @@ Route::get('admin/posts/{post}','App\Http\Controllers\Admin\PostsController@edit
 Route::put('admin/posts/{post}','App\Http\Controllers\Admin\PostsController@update')->name('admin.posts.update');
 Route::delete('admin/posts/{post}', [PostsController::class, 'delete'])
      ->name('admin.posts.destroy');
+
 Route::post('{post}/photos','App\Http\Controllers\Admin\PhotosController@store')
 ->name('admin.posts.photos.store');
 
