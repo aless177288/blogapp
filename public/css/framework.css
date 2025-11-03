@@ -35,14 +35,48 @@
 }
 .container-flex{
 	display: flex;
-	margin-bottom: 20px;
-	  margin-bottom: 15px; 
+	flex-wrap: wrap;
+	   height: 40px; 
+	
+}
+
+
+.container-flex1{
+    display: flex;
+    flex-wrap: wrap;
+    /* Usar un gap ligero en el contenedor principal ayuda a la separación lateral */
+    column-gap: 8px; /* Espacio horizontal entre las categorías */
     
-    /* * OPCIONAL: Define cómo se comportan los ítems. 
-     * Si no quieres que se estiren al 100% de la barra, usa 'auto'.
-     */
-    flex: 10px 0 auto; 
-    list-style: none;
+    /* AÑADIDO: row-gap es la solución más robusta para el corte vertical */
+    row-gap: 15px;  /* Espacio vertical entre filas de categorías */
+    
+    margin-bottom: 20px;
+    
+    /* Asegúrate que el UL no tenga una altura fija que lo estrangule */
+    height: auto; 
+    
+    /* Importante: Asegúrate que el UL no tiene un padding vertical 0 o un overflow: hidden */
+    padding-top: 5px; 
+    padding-bottom: 5px;
+}
+
+/* 2. Estilos para cada Item (<li>) -- EL PUNTO CLAVE */
+.container-flex1 li {
+    /* Eliminamos margin-bottom aquí porque ahora usamos row-gap */
+    
+    /* * OPCIONAL: Define cómo se comportan los ítems. */
+    flex: 0 0 auto; 
+    list-style: none; /* Asegura que no haya viñetas si la clase list-unstyled falla */
+}
+
+/* 3. Estilos del Enlace (<a>) -- Para el botón visual */
+.container-flex1 li a {
+    /* Dale un padding interno a la etiqueta 'a' para que parezca un botón o badge */
+    padding: 5px 10px; 
+    border: 1px solid #ccc; /* Un borde sutil para definir la separación visual */
+    border-radius: 4px; /* Bordes redondeados */
+    text-decoration: none; /* Quita el subrayado */
+    display: inline-block; /* Permite aplicar padding y margin */
 }
 .space-between{
 	justify-content: space-between;
@@ -123,10 +157,10 @@
 }
 .list-unstyled{
 	padding-left: 0;
-    list-style: none;
 }
 .list-unstyled1 li {
-    margin: 0 10px 10px 10px; /* Espaciado entre elementos */
+	margin: -15px 10px 10px 10px; /* Espaciado entre elementos */
+	list-style: none;
 }
 
 

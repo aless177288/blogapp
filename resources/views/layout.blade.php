@@ -33,12 +33,13 @@
 			</nav>
 		</div>
 	</header>
+	
 	<header class="space-inter2">
 		
 
-			<div class="container space-between">
+			<div class="container container-flex ">
 				<nav class="custom-wrapper" >
-					<ul class="container-flex list-unstyled">
+					<ul class="container-flex list-unstyled1">
 						@foreach($categories as $category)
 					
 						<li><a href="{{Route('category.show',$category)}}" class="text-uppercase">{{$category->name}}</a></li>
