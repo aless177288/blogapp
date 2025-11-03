@@ -260,7 +260,7 @@ a.btn-bar{
 	letter-spacing: 1px;
 	font-weight: 300;
 }
-.page .latest-posts{
+.page .latest-posts{ 
 	max-width: 350px;
 }
 .page ul li{
@@ -353,7 +353,7 @@ a.btn-bar{
 
 			list-style: none;
 			float:left;
-			margin-right: 10px;
+			margin-right: 15px;
 		}
             
 

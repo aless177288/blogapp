@@ -36,7 +36,7 @@
 	<header class="space-inter2">
 		
 
-			<div class="container container-flex space-between">
+			<div class="container space-between">
 				<nav class="custom-wrapper" >
 					<ul class="container-flex list-unstyled">
 						@foreach($categories as $category)

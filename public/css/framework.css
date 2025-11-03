@@ -35,7 +35,14 @@
 }
 .container-flex{
 	display: flex;
-	flex-wrap: wrap;
+	margin-bottom: 20px;
+	  margin-bottom: 15px; 
+    
+    /* * OPCIONAL: Define cómo se comportan los ítems. 
+     * Si no quieres que se estiren al 100% de la barra, usa 'auto'.
+     */
+    flex: 10px 0 auto; 
+    list-style: none;
 }
 .space-between{
 	justify-content: space-between;
@@ -114,6 +121,15 @@
 	padding-left: 0;
     list-style: none;
 }
+.list-unstyled{
+	padding-left: 0;
+    list-style: none;
+}
+.list-unstyled1 li {
+    margin: 0 10px 10px 10px; /* Espaciado entre elementos */
+}
+
+
 
 .img-responsive{
 	max-width: 100%;
