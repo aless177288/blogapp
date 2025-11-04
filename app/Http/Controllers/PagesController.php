@@ -21,6 +21,12 @@ $categories = Category::all();
 return view('welcome', compact('posts','categories'));
 
             }
+
+
+            public function portafolio(){
+$posts = Post::all();
+                return view('portafolio',compact('posts'));
+            }
             
           
 

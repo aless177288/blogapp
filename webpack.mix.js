@@ -11,15 +11,18 @@ const mix = require('laravel-mix');
  |
  */
 
+// AdminLTE assets (si los necesitas)
 mix.js('resources/js/app.js', 'public/adminlte/js')
-    .sass('resources/sass/app.scss', 'public/adminlte/css')
-    .sourceMaps();
+   .sass('resources/sass/app.scss', 'public/adminlte/css')
+   .sourceMaps();
 
-   //  const mix = require('laravel-mix');
+// Tailwind CSS assets (tu nuevo CSS)
+mix.postCss('resources/css/app.css', 'public/css', [
+    require('tailwindcss'),
+    require('autoprefixer'),
+]);
 
-   //  mix.js('resources/js/custom.js', 'public/adminlte/js')
-   //      .js('resources/js/app.js', 'public/adminlte/js');
-   //     // .sass('resources/sass/custom.scss', 'public/adminlte/css')
-   //     // .copy('node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js', 'public/adminlte/js')
-   //     // .copy('node_modules/jquery-datetimepicker/jquery.datetimepicker.css', 'public/adminlte/css');
-    
+// Assets adicionales si los necesitas
+// mix.js('resources/js/custom.js', 'public/adminlte/js')
+//    .copy('node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js', 'public/adminlte/js')
+//    .copy('node_modules/jquery-datetimepicker/jquery.datetimepicker.css', 'public/adminlte/css');

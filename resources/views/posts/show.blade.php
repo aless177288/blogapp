@@ -1,4 +1,6 @@
 
+  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+  
 @extends('layout')
 
 @section('meta-title',$post->title)
@@ -6,14 +8,22 @@
 
 
 @section('content')
+
 <article class="post container">
   @if($post->photos->count() === 1)
-			<figure ><img src="{{$post->photos->first()->url}}" class="img-responsive" alt=""></figure>
-      
+   <div class="flex justify-center my-6">
+        <figure class="w-full max-w-xl aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-md">
+            <img src="{{$post->photos->first()->url}}" 
+                 class="w-full h-full object-cover  mt-4"
+                 alt="{{$post->title}}">
+        </figure>
+    </div>
      
-      @elseif($post->photos->count() > 1)
-      @include('posts.carousel')
-      @endif
+       @elseif($post->photos->count() > 1)
+    <div class="flex justify-center my-6">
+        @include('posts.carousel')
+    </div>
+    @endif
 		
     <div class="content-post">
       <header class="container-flex space-between">
@@ -67,3 +77,7 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script src="/js/twitter-bootstrap.js"></script>
 @endpush
+
+
+
+

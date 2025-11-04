@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\PostsController;
 */
 
 Route::get('/', '\App\Http\Controllers\PagesController@home');
+Route::get('portafolio', '\App\Http\Controllers\PagesController@portafolio');
 Route::get('blog/{post}', '\App\Http\Controllers\PostsController@show')->name('posts.show');
 Route::get('category/{category}', '\App\Http\Controllers\PostsController@category')->name('category.show');
 Route::post('/send-telegram', '\App\Http\Controllers\ContactController@sendMessage')->name('contact.send');
