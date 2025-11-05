@@ -94,8 +94,8 @@
             <input type="text" placeholder="Tu nombre" name="name" required>
 
             <label for="whatsapp"><b>whatsapp</b></label>
-            <input type="whatsapp" placeholder="123-45-50-> Whatsapp" name="whatsapp" required>
-
+            <input type="text" placeholder="" name="whatsapp" required>
+<br>
             <label for="message"><b>Mensaje</b></label>
             <textarea placeholder="Escribe tu mensaje..." name="message" required></textarea>
 			<button type="submit" class="btn">Enviar</button>

@@ -1,15 +1,18 @@
-<div class="carousel-simple max-w-sm mx-auto">
-    <div class="grid grid-cols-3 md:grid-cols-4 gap-2">  {{-- gap-2 en lugar de gap-1 --}}
+<div class="carousel-simple max-w-2xl mx-auto">
+    {{-- Grid de imágenes --}}
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
         @foreach($post->photos as $photo)
-        <div class="aspect-square overflow-hidden rounded-md shadow-sm">
+        <div class="aspect-square overflow-hidden rounded-lg shadow-sm">
             <img src="{{ url($photo->url) }}" 
                  alt="Imagen {{ $loop->iteration }}"
-                 class="w-full h-full object-cover hover:scale-110 transition duration-200 cursor-pointer">
+                 class="w-full h-full object-cover hover:scale-105 transition duration-300 cursor-pointer">
         </div>
         @endforeach
     </div>
     
-    <div class="text-center mt-2 text-gray-500 text-xs">
+    {{-- Información --}}
+    <div class="text-center mt-3 text-gray-600 text-sm">
         {{ $post->photos->count() }} foto{{ $post->photos->count() > 1 ? 's' : '' }}
     </div>
 </div>
+

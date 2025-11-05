@@ -11,13 +11,13 @@
 
 <article class="post container">
   @if($post->photos->count() === 1)
-   <div class="flex justify-center my-6">
-        <figure class="w-full max-w-xl aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-md">
-            <img src="{{$post->photos->first()->url}}" 
-                 class="w-full h-full object-cover  mt-4"
-                 alt="{{$post->title}}">
-        </figure>
-    </div>
+ <div class="flex justify-center max-w-2xl mx-auto">  {{-- max-w-2xl en lugar de max-w-xl --}}
+    <figure class="w-full aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-lg">  {{-- shadow-lg --}}
+        <img src="{{$post->photos->first()->url}}" 
+             class="w-full h-full object-cover"
+             alt="{{$post->title}}">
+    </figure>
+</div>
      
        @elseif($post->photos->count() > 1)
     <div class="flex justify-center my-6">
@@ -30,6 +30,10 @@
         <div class="date">
           <span class="c-gris">{{$post->published_at->format('M d')}}</span>
         </div>
+
+        
+
+        
         <div class="post-category">
           <span class="category">{{$post->category->name}}</span>
         </div>
@@ -52,6 +56,7 @@
               <li><a href="http://pinterest.com/pin/create/button/?url=&description=" target="_blank" title="compartir en Pinteres"><img alt="Pin it" src="/img/flat_web_icon_set/Pinterest.png"></a></li>
             </ul>
           </div>
+
           <div class="tags container-flex">
             @foreach ($post->tags as $tag )
                 
