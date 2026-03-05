@@ -15,70 +15,69 @@ class PostsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        Post::truncate();
-        Category::truncate();
-        Tag::truncate();
-        
-        $category = new Category;
-        $category->name="categoria1";
-        $category->save();
-        $category = new Category;
-        $category->name="categoria2";
-        $category->save();
-        $category = new Category;
-        $category->name="categoria3";
-        $category->save();
-        $category = new Category;
-        $category->name="categoria4";
-        $category->save();
+  use App\Models\Post;
+use App\Models\Category;
+use App\Models\Tag;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
+public function run()
+{
 
-        $post = new Post;
-        $post->title = "mi primer post";
-        $post->url = str::slug("mi primer post");
-        $post->excerpt = "mi primer contenido";
-        $post->body = "<p>contenido de mi primer post</p>";
-        $post->published_at = Carbon::now()->subDay(4);
-        $post->category_id = 1;
-        $post->save();
+    Post::truncate();
+    Category::truncate();
+    Tag::truncate();
 
-        $post->tags()->attach(Tag::create(['name'=>'Etiqueta 1']));
+    // Categorías
+    $categories = [
+        'Backend Development',
+        'Frontend Development',
+        'DevOps & Linux',
+        'Internet of Things',
+        'Artificial Intelligence',
+        '3D Printing',
+        'Electronics',
+        'Personal Projects'
+    ];
 
-        $post = new Post;
-        $post->title = "mi segundo post";
-        $post->url = str::slug("mi segundo post");
-        $post->excerpt = "mi segundo contenido";
-        $post->body = "<p>contenido de mi segundo post</p>";
-        $post->published_at = Carbon::now()->subDay(2);
-        $post->category_id = 2;
-        $post->save();
-
-        $post->tags()->attach(Tag::create(['name'=>'Etiqueta 2']));
-
-        $post = new Post;
-        $post->title = "mi tercer post";
-        $post->url = str::slug("mi tercer post");
-        $post->excerpt = "mi tercer contenido";
-        $post->body = "<p>contenido de mi tercer post</p>";
-        $post->published_at = Carbon::now()->subDay(3);
-        $post->category_id = 3;
-        $post->save();
-
-        $post->tags()->attach(Tag::create(['name'=>'Etiqueta 3']));
-
-        $post = new Post;
-        $post->title = "mi cuarto post";
-        $post->url = str::slug("mi cuarto post");
-        $post->excerpt = "mi tercer contenido";
-        $post->body = "<p>contenido de mi cuarto post</p>";
-        $post->published_at = Carbon::now()->subDay(3);
-        $post->category_id = 4;
-        $post->save();
-
-        $post->tags()->attach(Tag::create(['name'=>'Etiqueta4']));
-
-
+    foreach ($categories as $cat) {
+        Category::create([
+            'name' => $cat
+        ]);
     }
+
+    // Tags
+    $tags = [
+        'Laravel',
+        'React',
+        'FastAPI',
+        'Linux',
+        'ESP32',
+        'MQTT',
+        'Arduino',
+        'Docker',
+        'DigitalOcean',
+        'Fusion 360'
+    ];
+
+    foreach ($tags as $tag) {
+        Tag::create([
+            'name' => $tag
+        ]);
+    }
+
+    // Post
+    $post = new Post;
+    $post->title = "Mi primer post";
+    $post->url = Str::slug("Mi primer post");
+    $post->excerpt = "Mi primer contenido";
+    $post->body = "<p>contenido de mi primer post</p>";
+    $post->published_at = Carbon::now()->subDays(4);
+    $post->category_id = 1;
+    $post->save();
+
+    // Asociar tags
+    $post->tags()->attach([1,3,5]);
+
+}
 }
