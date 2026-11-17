@@ -15,15 +15,23 @@ class ContactController extends Controller
             'message' => 'required|string|max:1000',
         ]);
 
-        // 2. Obtener las credenciales del .env
-        $token = env('TELEGRAM_BOT_TOKEN');
-        $chatId = env('TELEGRAM_CHAT_ID');
-        
-        // 3. Formatear el mensaje
-        $message = "🌐 *Nuevo mensaje del Portafolio* 🌐\n\n"
-                 . "👤 *De:* " . htmlspecialchars($request->name) . "\n"
-                 . "📞 *Telefono Whats:* " . htmlspecialchars($request->whatsapp) . "\n"
-                 . "💬 *Mensaje:*\n" . htmlspecialchars($request->message);
+        // 2. Obtener las credenciales desde config
+        $token = config('services.telegram.bot_token');
+        $chatId = config('services.telegram.chat_id');
+
+        if (!$token || !$chatId) {
+            return redirect()->back()->with('error', 'El servicio de mensajería no está configurado actualmente.');
+        }
+
+        // 3. Formatear el mensaje en HTML seguro
+        $name = htmlspecialchars($request->name, ENT_QUOTES, 'UTF-8');
+        $whatsapp = htmlspecialchars($request->whatsapp, ENT_QUOTES, 'UTF-8');
+        $userMessage = htmlspecialchars($request->message, ENT_QUOTES, 'UTF-8');
+
+        $message = "🌐 <b>Nuevo mensaje del Portafolio</b> 🌐\n\n"
+                 . "👤 <b>De:</b> {$name}\n"
+                 . "📞 <b>WhatsApp / Teléfono:</b> {$whatsapp}\n"
+                 . "💬 <b>Mensaje:</b>\n{$userMessage}";
 
         // 4. Enviar el mensaje a Telegram
         $url = "https://api.telegram.org/bot{$token}/sendMessage";
@@ -31,7 +39,7 @@ class ContactController extends Controller
         $response = Http::post($url, [
             'chat_id' => $chatId,
             'text' => $message,
-            'parse_mode' => 'Markdown' // Usamos Markdown para negritas y emojis
+            'parse_mode' => 'HTML',
         ]);
 
         // 5. Responder al usuario

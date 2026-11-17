@@ -1,0 +1,11 @@
+.git
+.gitignore
+.editorconfig
+node_modules
+vendor
+.env
+.env.backup
+tests
+docker-compose*.yml
+*.log
+origin)

@@ -2,49 +2,42 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\Photo;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 class PhotosController extends Controller
 {
-        
-    // public function store(Post $post){
-    //    $this->validate(request(), [
-    //     'photo' => 'image|max:500'
-    //    ]);
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
-    //     $photo = request()->file('photo');
-    // }
     public function store(Post $post, Request $request)
     {
         $request->validate([
-            'photo' => 'image|max:5000' 
+            'photo' => 'required|image|mimes:jpeg,png,jpg,webp,gif|max:5120',
         ]);
-    
-        $photo = $request->file('photo')->store('public');
-          $photoUrl = Storage::url($photo);
 
-       Photo::create([
-        'url'=> $photoUrl,
-        'post_id' => $post->id
-       ]);
+        $path = $request->file('photo')->store('posts', 'public');
+        $photoUrl = Storage::url($path);
 
+        $photo = $post->photos()->create([
+            'url' => $photoUrl,
+        ]);
+
+        return response()->json($photo, 201);
     }
-    public function destroy(Photo $photo){
+
+    public function destroy(Photo $photo)
+    {
+        $relativePath = ltrim(str_replace('/storage', '', $photo->url), '/');
+        Storage::disk('public')->delete($relativePath);
+
         $photo->delete();
-        $photpath = str_replace('storage', 'public', $photo->url);
-        Storage::delete($photpath);
-       
-        return back()->with('flash','foto eliminada');
 
+        return back()->with('flash', 'Foto eliminada correctamente.');
     }
-    
-    // Resto del código para guardar la imagen en el servidor
-
 }
-
-
-

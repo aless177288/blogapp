@@ -2,32 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\Category;
 
 class PagesController extends Controller
 {
-            public function home()
-            {
-                
-                // se movio a query scopes en Post.php
+    public function home()
+    {
+        $posts = Post::published()
+            ->with(['category', 'tags', 'photos'])
+            ->paginate(6);
 
-                // $posts = Post::whereNotNull('published_at')
-                // ->where('published_at','<=',Carbon::now())
-                // ->latest('published_at')->get();
-$posts = Post::published()->paginate(6);
-$categories = Category::all();
-return view('welcome', compact('posts','categories'));
+        return view('welcome', compact('posts'));
+    }
 
-            }
+    public function portafolio()
+    {
+        $posts = Post::published()
+            ->with(['category', 'tags', 'photos'])
+            ->take(6)
+            ->get();
 
-
-            public function portafolio(){
-$posts = Post::all();
-                return view('portafolio',compact('posts'));
-            }
-            
-          
-
+        return view('portafolio', compact('posts'));
+    }
 }

@@ -1,64 +1,122 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# 🚀 Blog & Developer Portfolio (Laravel + Docker)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![PHP Version](https://img.shields.io/badge/PHP-8.1-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+[![Laravel](https://img.shields.io/badge/Laravel-8.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Nginx](https://img.shields.io/badge/Nginx-Alpine-009639?style=for-the-badge&logo=nginx&logoColor=white)](https://nginx.org)
+[![MariaDB](https://img.shields.io/badge/MariaDB-Optimized-003545?style=for-the-badge&logo=mariadb&logoColor=white)](https://mariadb.org)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-## About Laravel
+Aplicación web full-stack de Blog y Portafolio profesional desarrollada con **Laravel**, diseñada y optimizada para ejecutarse en entornos de alta eficiencia y recursos limitados (ej. contenedores Docker en Droplets de DigitalOcean con 512 MB a 1 GB de RAM).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🌟 Características Principales
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Panel Administrativo Protegido**: Gestión completa de artículos (CRUD), categorías, etiquetas (Many-to-Many) y subida de imágenes vinculadas.
+- **Frontend Dinámico y Responsivo**: Vistas optimizadas en Blade, paginación nativa y navegación fluida.
+- **Integración con Telegram Bot API**: Formulario de contacto directo con sanitización HTML y protección contra ataques por fuerza bruta (`Rate Limiting / Throttle`).
+- **Arquitectura Limpia & SOLID**:
+  - Validaciones desacopladas mediante **Form Requests** (`StorePostRequest`, `UpdatePostRequest`).
+  - Eventos de modelo Eloquent (`booted()`) para eliminación en cascada de archivos multimedia físicos en storage.
+  - Inyección de datos globales mediante **View Composers** con almacenamiento en caché.
+- **Optimización de Rendimiento Extrema (N+1 Free)**:
+  - Eliminación de consultas N+1 mediante **Eager Loading** (`with(['category', 'tags', 'photos'])`).
+  - Índices dedicados en base de datos para búsquedas por `slug` (URL) y fechas de publicación.
+  - PHP **OPcache** preconfigurado y compresión **Gzip** en Nginx.
+- **Suite de Pruebas Automatizadas**: Tests funcionales con **PHPUnit** para validar seguridad, rutas públicas y flujo de contacto.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠️ Stack Tecnológico
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Capa | Tecnología |
+| :--- | :--- |
+| **Backend** | PHP 8.1, Laravel 8.x, Eloquent ORM |
+| **Frontend** | Blade Templates, Tailwind CSS, JavaScript |
+| **Base de Datos** | MariaDB 10.6 / MySQL con buffers optimizados para bajo consumo de RAM |
+| **Servidor Web** | Nginx Alpine con compresión Gzip y expiración de caché estático |
+| **Contenedores** | Docker Multi-Stage Build & Docker Compose |
+| **Testing** | PHPUnit Feature & Unit Tests |
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## 🐳 Despliegue Rápido con Docker
 
-### Premium Partners
+El proyecto cuenta con un entorno Docker listo para producción o desarrollo local sin requerir PHP ni Composer instalados en la máquina anfitriona:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/tu-usuario/blogapp.git
+cd blogapp
+```
 
-## Contributing
+### 2. Configurar variables de entorno
+```bash
+cp .env.example .env
+```
+> Ajusta las credenciales de base de datos y tus tokens de Telegram en `.env`.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Levantar los contenedores
+```bash
+docker compose up -d --build
+```
 
-## Code of Conduct
+### 4. Inicializar base de datos y storage
+```bash
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate --seed
+docker compose exec app php artisan storage:link
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Visita la aplicación en tu navegador: `http://localhost`.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## ⚡ Estrategia de Optimización para VPS / Droplet Limitado (512MB / 1GB RAM)
 
-## License
+Para alojar la aplicación con máxima velocidad en un Droplet de 1 vCPU y 1 GB de RAM en DigitalOcean:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. **Configurar Memoria Swap (2 GB)**:
+   ```bash
+   sudo fallocate -l 2G /swapfile
+   sudo chmod 600 /swapfile
+   sudo mkswap /swapfile
+   sudo swapon /swapfile
+   echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+   ```
+2. **Ajuste de MySQL / MariaDB**:
+   El archivo `docker-compose.yml` limita el `innodb_buffer_pool_size` a **64MB** y reduce el número de conexiones simultáneas para evitar caídas por OOM (Out Of Memory).
+3. **Ajuste de PHP-FPM**:
+   Configurado en modo `ondemand` (`pm.max_children = 5`, `pm.process_idle_timeout = 10s`) reduciendo el consumo base de RAM a menos de **50MB**.
+4. **Caché en Producción**:
+   ```bash
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   ```
+
+---
+
+## 🧪 Pruebas Automatizadas (Testing)
+
+Para ejecutar la suite de pruebas funcionales:
+
+```bash
+# En entorno local con PHP:
+php artisan test
+
+# O mediante Docker:
+docker compose exec app php artisan test
+```
+
+### Cobertura de pruebas incluida:
+- `HomePageTest`: Renderizado de página principal, portafolio y artículos publicados.
+- `AdminSecurityTest`: Verificación de protección de rutas y redirección a login para usuarios no autenticados.
+- `ContactTelegramTest`: Validación de campos requeridos y simulación de envío exitoso a la API de Telegram.
+
+---
+
+## 📄 Licencia
+
+Este proyecto es de código abierto bajo la licencia [MIT](LICENSE).

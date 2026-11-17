@@ -553,19 +553,19 @@ bg-card5
                                            article-data
                                         ">
                                         <span >Fecha: {{$post->published_at}}</span>
-                                            <span >Categoria: {{$post->name_categoria}}</span>
+                                            <span >Categoria: {{ optional($post->category)->name }}</span>
                                         </div>
                                         <h4 
                                         class="
                                        article-head
-                                        "style="margin-top:2rem;"><a href="https://blog.estebanvalles.info/blog/{{$post->url}}" >{{$post->title}}</a></h4>
+                                        "style="margin-top:2rem;"><a href="{{ route('posts.show', $post) }}" >{{$post->title}}</a></h4>
                                         <p class="
                                         article-description
                                         ">
                                         {{$post->excerpt}}
                                     </p>
                                     <div class="read-more">
-                                        <a href="blog/{{$post->url}}" class="text-uppercase c-green cursor-pointer">LEER MAS</a>
+                                        <a href="{{ route('posts.show', $post) }}" class="text-uppercase c-green cursor-pointer">LEER MAS</a>
                                     </div>
                                 </div>
                             
@@ -606,7 +606,7 @@ bg-card5
             <h5 class="footer-header">MENÚ</h5>
             <ul class="footer-menu">
                 <li><a href="#">INICIO</a></li>
-                <li><a href="https://blog.estebanvalles.info/">BLOG</a></li>
+                <li><a href="{{ route('home') }}">BLOG</a></li>
                 <li><a href="#">FORMACIÓN</a></li>
                 <li><a href="#">CONTACTO</a></li>
             </ul>

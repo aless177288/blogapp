@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\Category;
@@ -12,16 +13,15 @@ use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
-
-
-    public function etiquetas(){
-
-        return "etiquetas";
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
+
     public function index()
     {
-        $posts = Post::latest()->get();
-    
+        $posts = Post::with(['category', 'tags'])->latest()->paginate(15);
+
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -32,26 +32,15 @@ class PostsController extends Controller
         return view('admin.posts.create', compact('categorias', 'tags'));
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $this->validate($request, [
-            'title'        => 'required|string|max:255',
-            'body'         => 'nullable|string',
-            'excerpt'      => 'nullable|string',
-            'published_at' => 'nullable|date',
-            'category_id'  => 'nullable|exists:categories,id',
-        ]);
-
-        // Crear slug único
         $slug = Str::slug($request->title);
 
-        // Verificar si ya existe un post con el mismo slug
         $count = Post::where('url', 'like', "{$slug}%")->count();
         if ($count > 0) {
             $slug .= '-' . ($count + 1);
         }
 
-        // Crear el post
         $post = Post::create([
             'title'        => $request->title,
             'url'          => $slug,
@@ -61,7 +50,6 @@ class PostsController extends Controller
             'category_id'  => $request->category_id,
         ]);
 
-        // Sincronizar etiquetas (si existen)
         if ($request->has('tags')) {
             $post->tags()->sync($request->tags);
         }
@@ -73,33 +61,16 @@ class PostsController extends Controller
 
     public function edit(Post $post)
     {
+        $post->load(['tags', 'photos']);
         $tags = Tag::all();
         $categorias = Category::all();
         return view('admin.posts.edit', compact('categorias', 'tags', 'post'));
     }
 
-        public function delete(Post $post)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-   
-        $post->delete();
-
-        return redirect()->route('admin.posts.index')
-                         ->with('success', 'El post fue eliminado correctamente.');
-    }
-
-    public function update(Request $request, Post $post)
-    {
-        $this->validate($request, [
-            'title'        => 'required|string|max:255',
-            'body'         => 'required|string',
-            'excerpt'      => 'required|string',
-            'published_at' => 'nullable|date',
-            'category_id'  => 'required|exists:categories,id',
-        ]);
-
         $slug = Str::slug($request->title);
 
-        // Evitar conflicto con otros slugs al editar
         if (Post::where('url', $slug)->where('id', '!=', $post->id)->exists()) {
             $slug .= '-' . $post->id;
         }
@@ -113,7 +84,6 @@ class PostsController extends Controller
             'category_id'  => $request->category_id,
         ]);
 
-        // Sincronizar etiquetas (evita duplicados)
         $post->tags()->sync($request->get('tags', []));
 
         return redirect()
@@ -121,6 +91,16 @@ class PostsController extends Controller
             ->with('flash', 'Tu publicación ha sido actualizada correctamente.');
     }
 
+    public function destroy(Post $post)
+    {
+        $post->delete();
 
+        return redirect()->route('admin.posts.index')
+                         ->with('success', 'El post fue eliminado correctamente.');
+    }
 
+    public function delete(Post $post)
+    {
+        return $this->destroy($post);
+    }
 }

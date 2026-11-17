@@ -2,31 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+
 class PostsController extends Controller
 {
-    public function category(Category $category){
+    public function category(Category $category)
+    {
+        $posts = $category->posts()
+            ->published()
+            ->with(['category', 'tags', 'photos'])
+            ->paginate(6);
 
-
- $posts = $category->posts()->latest()->get();
-
-  
-
-    
-    return view('posts.categoryPosts', compact('category','posts'));
+        return view('posts.categoryPosts', compact('category', 'posts'));
     }
 
-
-
     public function show(Post $post)
-    {   
-        // $post = Post::find($id);
+    {
+        $post->load(['category', 'tags', 'photos']);
 
-        $categories = Category::all();
-    return view('posts.show',compact('categories','post'));
-
-
+        return view('posts.show', compact('post'));
     }
 }
