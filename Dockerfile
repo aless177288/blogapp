@@ -1,7 +1,7 @@
 # ==========================================
 # Imagen de Produccion PHP-FPM (Alpine)
 # ==========================================
-FROM php:8.1-fpm-alpine
+FROM php:8.2-fpm-alpine
 
 # Instalar dependencias del sistema y extensiones de PHP requeridas
 RUN apk add --no-cache \
