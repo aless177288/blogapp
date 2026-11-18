@@ -16,6 +16,9 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-secret_db_pass}
     volumes:
       - ./.env:/var/www/html/.env
+      - ./resources:/var/www/html/resources:ro
+      - ./routes:/var/www/html/routes:ro
+      - ./app:/var/www/html/app:ro
       - ./storage/app/public:/var/www/html/storage/app/public
     networks:
       - blog_network
