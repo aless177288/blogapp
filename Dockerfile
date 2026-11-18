@@ -31,7 +31,7 @@ WORKDIR /var/www/html
 
 # Copiar configuraciones optimizadas
 COPY docker/php/local.ini /usr/local/etc/php/conf.d/local.ini
-COPY docker/php/php-fpm.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+COPY docker/php/php-fpm.conf /usr/local/etc/php-fpm.d/z-custom.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
@@ -47,4 +47,4 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 EXPOSE 9000
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["php-fpm", "-F"]
