@@ -39,7 +39,7 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 COPY . .
 
 # Instalar dependencias de Composer optimizadas para produccion
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-scripts
 
 # Configurar permisos
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
