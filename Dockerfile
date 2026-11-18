@@ -1,15 +1,5 @@
 # ==========================================
-# Etapa 1: Compilacion de Assets Frontend
-# ==========================================
-FROM node:18-alpine AS frontend
-WORKDIR /app
-COPY package*.json webpack.mix.js tailwind.config.js ./
-COPY resources ./resources
-RUN npm ci --prefer-offline --no-audit || npm install
-RUN npm run prod
-
-# ==========================================
-# Etapa 2: Imagen de Produccion PHP-FPM
+# Imagen de Produccion PHP-FPM (Alpine)
 # ==========================================
 FROM php:8.1-fpm-alpine
 
@@ -45,13 +35,8 @@ COPY docker/php/php-fpm.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Copiar archivos del proyecto
+# Copiar archivos del proyecto (incluye assets ya compilados en public/)
 COPY . .
-
-# Copiar assets compilados desde la etapa frontend
-COPY --from=frontend /app/public/css ./public/css
-COPY --from=frontend /app/public/js ./public/js
-COPY --from=frontend /app/public/mix-manifest.json ./public/mix-manifest.json
 
 # Instalar dependencias de Composer optimizadas para produccion
 RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
