@@ -14,7 +14,7 @@ class AddIndexesAndOptimizationsToTables extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('url')->unique()->change();
+            $table->unique('url');
             $table->index('published_at');
             $table->index('category_id');
         });
